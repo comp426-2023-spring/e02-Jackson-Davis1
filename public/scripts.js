@@ -10,26 +10,25 @@ let opponentShotOptions = document.createElement("select");
 opponentShotOptions.id = 'opponentShotOptions';
 let playerShot = document.createElement("div");
 let opponentShot = document.createElement("div");
+let resultContainer = document.getElementById("resultContainer");
 
 function handleDropDown(dropDown, name, value) {
     // playable shots
     const rock = document.createElement("option");
-    rock.value = `rock-${name}`;
+    rock.value = `rock`;
     rock.text = 'rock'
     const paper = document.createElement("option");
-    paper.value = `paper-${name}`;
+    paper.value = `paper`;
     paper.text = `paper`
     const scissors = document.createElement("option");
-    scissors.value = `scissors-${name}`;
+    scissors.value = `scissors`;
     scissors.text = `scissors`
     const lizard = document.createElement("option");
-    lizard.value = `lizard-${name}`;
+    lizard.value = `lizard`;
     lizard.text = `lizard`;
     const spock = document.createElement("option");
-    spock.value = `spock-${name}`;
+    spock.value = `spock`;
     spock.text = `spock`
-    console.log(dropDown);
-
     // initial shot values
     dropDown.remove(rock);
     dropDown.remove(paper);
@@ -67,20 +66,20 @@ opponentText.id = "opponent-text";
 opponentText.append("Opponent Shot: ")
 let isPlayerText = false;
 let isOpponentText = false;
-function handleOpponentType(playerText, opponentText, value){
+function handleOpponentType(playerText, opponentText, value) {
 
     if (!isPlayerText) {
         playerText.append("Player Shot: ")
         playerShot.append(playerText);
         isPlayerText = true;
     }
-    if (value === 'player' && !isOpponentText){
+    if (value === 'player' && !isOpponentText) {
         opponentShot.append(opponentText);
         opponentShot.append(opponentShotOptions);
 
         isOpponentText = true;
     }
-    else if ((value === 'player' || value === 'computer') && isOpponentText){
+    else if ((value === 'player' || value === 'computer') && isOpponentText) {
         document.getElementById("opponent-text").outerHTML = "";
         document.getElementById("opponentShotOptions").outerHTML = "";
         isOpponentText = false;
@@ -99,3 +98,46 @@ playerShot.append(playerShotOptions);
 opponentShot.append(opponentShotOptions);
 playContainer.append(playerShot);
 playContainer.append(opponentShot);
+
+
+let playResult = document.createElement("h3");
+playResult.id = 'play-result';
+let isResetButton = false;
+async function play() {
+    let game = gameMode.value;
+    let shot = playerShotOptions.value;
+    let withOpponent = opponentType.value === 'player' ? true : false;
+    if (withOpponent) {
+        const body = await playOpponent(`http://localhost:8080/app/${game}/play/${shot}`);
+        playResult.innerText = `player shot: ${body['player']} \n opponent shot: ${body['opponent']} \n result: ${body['result']}`;
+    }
+    else {
+        const body = await playNoOpponent(`http://localhost:8080/app/${game}/play/`)
+        playResult.innerText = `player shot: ${body['player']}`;
+    }
+    if (!isResetButton) {
+        let resetButton = document.createElement("button");
+        resetButton.onclick = () => { reset(); }
+        resetButton.innerText = 'reset';
+        resultContainer.append(resetButton);
+        isResetButton = true;
+    }
+    resultContainer.append(playResult);
+
+}
+
+function reset() {
+    location.reload();
+}
+
+async function playNoOpponent(url) {
+    response = await fetch(url);
+    const body = await response.json();
+    return body;
+}
+
+async function playOpponent(url) {
+    response = await fetch(url);
+    const body = await response.json();
+    return body;
+}

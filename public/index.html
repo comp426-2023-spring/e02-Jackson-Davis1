@@ -1,10 +1,7 @@
-<html>
-
-<head>
-    <title>Rock</title>
-    <!-- Link to your script file(s) and CSS in here somewhere -->
-</head>
-
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Rock</title>
 <body>
     <div>
         <label for="gameChoice">Game Mode: </label>
@@ -23,12 +20,16 @@
                 <option value="computer">Computer</option>
             </select>
         </div>
-        <div id = "playContainer"></div>
-        <button id="playButton">Play</button>
+        <div id="playContainer"></div>
+        <button id="playButton" onClick="play()">Play</button>
         <div class="ruleInfo">
             rule placeholder
         </div>
+        <div id="resultContainer">
+
+        </div>
     </div>
-<script src="scripts.js"></script>
+    <script src="scripts.js"></script>
 </body>
+
 </html>
