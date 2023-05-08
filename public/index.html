@@ -1,13 +1,34 @@
 <html>
-    <head>
-        <title>Rock</title>
-        <!-- Link to your script file(s) and CSS in here somewhere -->
-    </head>
-    <body>
-    test
-    <input type="checkbox" id="toggleCheck">
-    <!-- Your interface markup goes here -->
-    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
 
-    </body>
+<head>
+    <title>Rock</title>
+    <!-- Link to your script file(s) and CSS in here somewhere -->
+</head>
+
+<body>
+    <div>
+        <label for="gameChoice">Game Mode: </label>
+        <div class="dropdown">
+            <select id="gameChoice">
+                <option value="rps">RPS (Rock Paper Scissors)</option>
+                <option value="rpsls">RPSLS (Rock Paper Scissors Lizard Spock)</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <label for="opponentChoice">Opponent Type: </label>
+        <div class="dropdown">
+            <select id="opponentChoice">
+                <option value="player">Player</option>
+                <option value="computer">Computer</option>
+            </select>
+        </div>
+        <div id = "playContainer"></div>
+        <button id="playButton">Play</button>
+        <div class="ruleInfo">
+            rule placeholder
+        </div>
+    </div>
+<script src="scripts.js"></script>
+</body>
 </html>
