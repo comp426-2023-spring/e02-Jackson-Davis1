@@ -3,6 +3,7 @@
 // https://nodejs.org/docs/latest-v18.x/api/module.html#modulecreaterequirefilename
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
+console.log(1);
 // The above two lines allow us to use ES methods and CJS methods for loading
 // dependencies.
 // Load minimist for command line argument parsing
