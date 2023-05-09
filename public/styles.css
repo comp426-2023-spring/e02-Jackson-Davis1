@@ -1,7 +1,5 @@
 .container{
     display: grid;
-    direction: row;
-    align-items: left;
     justify-items: center;
     justify-self: left;
 
@@ -21,7 +19,6 @@
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -29,8 +26,6 @@
     position: relative;
     text-align: center;
     text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
@@ -72,7 +67,6 @@
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
     font-size: 14px;
     font-weight: 600;
     line-height: 20px;
@@ -80,8 +74,6 @@
     position: relative;
     text-align: center;
     text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
     white-space: nowrap;
