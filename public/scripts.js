@@ -10,6 +10,7 @@ let opponentShotOptions = document.createElement("select");
 opponentShotOptions.id = 'opponentShotOptions';
 let playerShot = document.createElement("div");
 let opponentShot = document.createElement("div");
+opponentShot.className="opShot";
 let resultContainer = document.getElementById("resultContainer");
 
 function handleDropDown(dropDown, name, value) {
@@ -47,23 +48,20 @@ function handleDropDown(dropDown, name, value) {
 }
 
 
-handleDropDown(playerShotOptions, 'player', 'rpsls');
 handleDropDown(opponentShotOptions, 'opponent', 'rpsls');
-handleDropDown(playerShotOptions, 'player', 'rps');
 handleDropDown(opponentShotOptions, 'opponent', 'rps');
 // append shot options to play container
 
 
 gameMode.addEventListener("change", () => {
     let value = gameMode.value;
-    handleDropDown(playerShotOptions, 'player', value);
     handleDropDown(opponentShotOptions, 'opponent', value);
 })
 let playerText = document.createElement("h3");
 playerText.id = "player-text";
 let opponentText = document.createElement("h3");
 opponentText.id = "opponent-text";
-opponentText.append("Opponent Shot: ")
+opponentText.append("Choose your shot: ")
 let isPlayerText = false;
 let isOpponentText = false;
 function handleOpponentType(playerText, opponentText, value) {
@@ -73,20 +71,20 @@ function handleOpponentType(playerText, opponentText, value) {
         playerShot.append(playerText);
         isPlayerText = true;
     }
-    if (value === 'player' && !isOpponentText) {
+    if (value === 'computer' && !isOpponentText) {
         opponentShot.append(opponentText);
         opponentShot.append(opponentShotOptions);
 
         isOpponentText = true;
     }
-    else if ((value === 'player' || value === 'computer') && isOpponentText) {
+    else if ((value === 'computer' || value === 'self') && isOpponentText) {
         document.getElementById("opponent-text").outerHTML = "";
         document.getElementById("opponentShotOptions").outerHTML = "";
         isOpponentText = false;
     }
 }
 
-handleOpponentType(playerText, opponentText, 'player');
+handleOpponentType(playerText, opponentText, 'computer');
 
 opponentType.addEventListener("change", () => {
     let value = opponentType.value;
@@ -94,9 +92,7 @@ opponentType.addEventListener("change", () => {
 })
 
 // add divs
-playerShot.append(playerShotOptions);
 opponentShot.append(opponentShotOptions);
-playContainer.append(playerShot);
 playContainer.append(opponentShot);
 
 
@@ -105,9 +101,11 @@ playResult.id = 'play-result';
 let isResetButton = false;
 async function play() {
     let game = gameMode.value;
-    let shot = playerShotOptions.value;
-    let withOpponent = opponentType.value === 'player' ? true : false;
+    let shot = opponentShotOptions.value;
+    let withOpponent = opponentType.value === 'computer' ? true : false;
     if (withOpponent) {
+        console.log(game);
+        console.log(shot);
         const body = await playOpponent(`http://localhost:8080/app/${game}/play/${shot}`);
         playResult.innerText = `player shot: ${body['player']} \n opponent shot: ${body['opponent']} \n result: ${body['result']}`;
     }
@@ -117,6 +115,7 @@ async function play() {
     }
     if (!isResetButton) {
         let resetButton = document.createElement("button");
+        resetButton.className = 'button-2'
         resetButton.onclick = () => { reset(); }
         resetButton.innerText = 'reset';
         resultContainer.append(resetButton);

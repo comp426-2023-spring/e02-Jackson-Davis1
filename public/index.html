@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Rock</title>
 
-    </head>
+<head>
+    <link rel="stylesheet" href="./styles.css">
+
+    <title>Rock</title>
+</head>
+
 <body>
-    <div>
-        <label for="gameChoice">Game Mode: </label>
-        <div class="dropdown">
-            <select id="gameChoice">
-                <option value="rps">RPS (Rock Paper Scissors)</option>
-                <option value="rpsls">RPSLS (Rock Paper Scissors Lizard Spock)</option>
-            </select>
+    <div class="container">
+        <div>
+            <label for="gameChoice">Game Mode: </label>
+            <div class="dropdown">
+                <select id="gameChoice">
+                    <option value="rps">RPS (Rock Paper Scissors)</option>
+                    <option value="rpsls">RPSLS (Rock Paper Scissors Lizard Spock)</option>
+                </select>
+            </div>
         </div>
-    </div>
-    <div>
-        <label for="opponentChoice">Opponent Type: </label>
-        <div class="dropdown">
-            <select id="opponentChoice">
-                <option value="player">Player</option>
-                <option value="computer">Computer</option>
-            </select>
-        </div>
-        <div id="playContainer"></div>
-        <button id="playButton" type="button" onclick="play()">Play</button>
-        <div class="ruleInfo">
-            <a href="https://www.wikihow.com/Play-Rock,-Paper,-Scissors"> Rules for RPS </a>
-            <a href="https://www.wikihow.com/Play-Rock-Paper-Scissors-Lizard-Spock">Rules for RPSLS</a>
-        </div>
-        <div id="resultContainer">
+        <div class="play"> 
+            <label for="opponentChoice">Opponent Type: </label>
+            <div class="dropdown">
+                <select id="opponentChoice">
+                    <option value="computer">Computer</option>
+                    <option value="self">Self</option>
+                </select>
+            </div>
+            <div id="playContainer"></div>
+            <button id="playButton" class="button-3" type="button" onclick="play()">Play</button>
+            <div class="ruleInfo">
+                <a href="https://www.wikihow.com/Play-Rock,-Paper,-Scissors"> Rules for RPS </a>
+                <a href="https://www.wikihow.com/Play-Rock-Paper-Scissors-Lizard-Spock">Rules for RPSLS</a>
+            </div>
+            <div id="resultContainer" class="result">
 
+            </div>
         </div>
+        <script src="scripts.js"></script>
     </div>
-    <script src="scripts.js"></script>
 </body>
 
 </html>
